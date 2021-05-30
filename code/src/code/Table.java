@@ -157,19 +157,25 @@ public class Table {
     public boolean checkForRF() {
     	
     	List<Integer> straightVals = new ArrayList<>();
+    	List<Integer> gameVals = new ArrayList<>();
+    	int count = 0;
+    	for (Card c : this.combine()) { gameVals.add(c.getValue()); };
     	straightVals.add(1);
-    	for (int i=0; i<=3; i++) { straightVals.add(i); }
-    	if (straightVals.contains(hand.get(0).getValue()) || straightVals.contains(hand.get(1).getValue())) {
-    		if (this.checkForFlush() && this.checkForStraight()) {
-    			return true;
+    	for (int i=0; i<=3; i++) { straightVals.add(i + 10); }
+    	for (Integer i : straightVals) {
+    		if (gameVals.contains(i)) {
+    			count++;
     		}
     	}
+    	if ((straightVals.contains(hand.get(0).getValue()) || straightVals.contains(hand.get(1).getValue())) && count == 5) {
+    		return true;
+    	}
     	return false;
+    	
     }
     
     public String toString() {
     	
-    	Boolean[] results = new Boolean[9];
     	if (this.checkForRF()) { return "You have a Royal Flush!"; }
     	if (this.checkForSF()) { return "You have a Straight Flush!"; }
     	if (this.checkFor(4)) { return "You have 4 of a Kind!"; }
