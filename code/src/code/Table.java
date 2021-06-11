@@ -5,12 +5,19 @@ import java.util.List;
 
 public class Table {
 
+	//Royal flush needs sorting - needs to be top 5 royals same suit.
+	
+	
 	private final List<Card> hand;
     private final List<Card> table;
 	
-    public Table(List<Card> h, List<Card> t) {
+    public Table(List<Card> h, List<Card> t) throws IllegalArgumentException {
     	this.hand = h;
     	this.table = t;
+    	if (isThereDuplicates()) {
+    		throw new IllegalArgumentException("There are duplicate cards.");
+    	}
+    	
     }
     
     public List<Card> getHand() {
@@ -30,6 +37,17 @@ public class Table {
     		allCards.add(cT);
     	}
     	return allCards;
+    }
+    
+    public boolean isThereDuplicates() {
+    	boolean duplicates = false;
+    	for (int j=0; j < this.combine().size(); j++) {
+    		for (int k=j+1; k < this.combine().size(); k++) {
+    			if (k!=j && combine().get(k).getSuit() == combine().get(j).getSuit() && combine().get(k).getValue() == combine().get(j).getValue())
+    				duplicates = true;
+    		}
+    	}
+    	return duplicates;
     }
     
     public boolean checkFor(int amount) {
@@ -125,7 +143,7 @@ public class Table {
     public boolean checkForFlush() {
     	
     	Integer[] counts = {0,0};
-    	for (Card c : this.combine()) {
+    	for (Card c : this.table) {
     		if (c.getSuit() == hand.get(0).getSuit()) {
     			counts[0] = counts[0] + 1;
     		}
@@ -167,7 +185,7 @@ public class Table {
     			count++;
     		}
     	}
-    	if ((straightVals.contains(hand.get(0).getValue()) || straightVals.contains(hand.get(1).getValue())) && count == 5) {
+    	if ((straightVals.contains(hand.get(0).getValue()) || straightVals.contains(hand.get(1).getValue())) && count == 5 && this.checkForFlush()) {
     		return true;
     	}
     	return false;

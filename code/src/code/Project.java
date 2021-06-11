@@ -9,12 +9,12 @@ public class Project {
 		
 		List<Card> t = new ArrayList<>();
 		List<Card> h = new ArrayList<>();
-		t.add(new Card(11, Suit.CLUBS));
-		t.add(new Card(10, Suit.CLUBS));
-		t.add(new Card(12, Suit.CLUBS));
-		t.add(new Card(13, Suit.CLUBS));
-		t.add(new Card(14, Suit.CLUBS));
-		h.add(new Card(1, Suit.CLUBS));
+		t.add(new Card(4, Suit.SPADES));
+		t.add(new Card(5, Suit.HEARTS));
+		t.add(new Card(6, Suit.CLUBS));
+		t.add(new Card(7, Suit.SPADES));
+		t.add(new Card(8, Suit.SPADES));
+		h.add(new Card(9, Suit.CLUBS));
 		h.add(new Card(10, Suit.CLUBS));
 		
 		

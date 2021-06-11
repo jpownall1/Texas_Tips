@@ -5,9 +5,14 @@ public class Card {
     private final int value;
     private final Suit suit;
     
-    public Card(int v, Suit s) {
-        this.value = v;
-        this.suit = s;
+    public Card(int v, Suit s) throws IllegalArgumentException {
+        if (v <= 13 && v >= 1) {
+        	this.value = v;
+        	this.suit = s;
+        } else {
+        	throw new IllegalArgumentException("Card value must be between 1 and 13.");
+        }
+    	
     }
 
     public int getValue() {
