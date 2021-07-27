@@ -143,7 +143,7 @@ public class Table {
     public boolean checkForFlush() {
     	
     	Integer[] counts = {0,0};
-    	for (Card c : this.table) {
+    	for (Card c : combine()) {
     		if (c.getSuit() == hand.get(0).getSuit()) {
     			counts[0] = counts[0] + 1;
     		}
@@ -195,15 +195,15 @@ public class Table {
     public String toString() {
     	
     	if (this.checkForRF()) { return "You have a Royal Flush!"; }
-    	if (this.checkForSF()) { return "You have a Straight Flush!"; }
-    	if (this.checkFor(4)) { return "You have 4 of a Kind!"; }
-    	if (this.checkForFull()) { return "You have a Full House!"; }
-    	if (this.checkForFlush()) { return "You have a Flush!"; }
-    	if (this.checkForStraight()) { return "You have a Straight!"; }
-    	if (this.checkFor(3)) { return "You have Three of a Kind!"; }
-    	if (this.checkForTwoPair()) { return "You have a Two Pair!"; }
-    	if (this.checkFor(2)) { return "You have a Pair!"; }
-    	if (hand.get(0).getValue() > hand.get(1).getValue()) {
+    	else if (this.checkForSF()) { return "You have a Straight Flush!"; }
+    	else if (this.checkFor(4)) { return "You have 4 of a Kind!"; }
+    	else if (this.checkForFull()) { return "You have a Full House!"; }
+    	else if (this.checkForFlush()) { return "You have a Flush!"; }
+    	else if (this.checkForStraight()) { return "You have a Straight!"; }
+    	else if (this.checkFor(3)) { return "You have Three of a Kind!"; }
+    	else if (this.checkForTwoPair()) { return "You have a Two Pair!"; }
+    	else if (this.checkFor(2)) { return "You have a Pair!"; }
+    	else if (hand.get(0).getValue() > hand.get(1).getValue()) {
     		return " You have high card " + hand.get(0).getValue();
     	}
     	return " You have high card " + hand.get(1).getValue();
