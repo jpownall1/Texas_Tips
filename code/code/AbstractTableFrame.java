@@ -87,11 +87,6 @@ public class AbstractTableFrame extends JFrame implements ActionListener {
         //set borders
         handPanel.setBorder(blackline);
         tablePanel.setBorder(blackline);
-        
-		//setting up combo boxes and buttons
-        JButton clearButton = new JButton("Clear");	//presses to clear all card options
-		JButton submitButton = new JButton("Submit");	//presses to submit cards to determine results
-		JTextArea textArea = new JTextArea();	//where the user will see results
 		
 		resultsPanel.add(clearButton);
 		resultsPanel.add(submitButton);
@@ -139,14 +134,13 @@ public class AbstractTableFrame extends JFrame implements ActionListener {
 		
 		submitButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-        		updateResults();
-        		System.out.println("submit working");
+				updateResults();
         	}
 		});
 		
 		clearButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-        		clearFilters();
+				clearFilters();
         	}
 		});
 		
@@ -169,21 +163,21 @@ public class AbstractTableFrame extends JFrame implements ActionListener {
         for (int i = 0; i < 7; i++) {
         	String suitS = suitComboBoxes[i].getSelectedItem().toString();
         	String value = valueComboBoxes[i].getSelectedItem().toString();
-        	Suit suit = Suit.valueOf(suitS.toLowerCase());
-        	if (i < 2) {
-        		if (suitS != "null" && value != "null") {
-        			hand.add(new Card(convertToInt(value), suit));
-        		}
-        	} else {
-        		if (suitS != "null" && value != "null") {
-        			table.add(new Card(convertToInt(value), suit));
-        		}
+        	if (suitS != "null" && value != "null") {
+	        	Suit suit = Suit.valueOf(suitS.toUpperCase());
+	        	if (i < 2) {
+	        		hand.add(new Card(convertToInt(value), suit));
+	        	} else {
+	        		table.add(new Card(convertToInt(value), suit));
+	        	}
         	}
         }
-        String result = new Table(hand, table).toString();
-        textArea.append(result);
-        System.out.println(result);
-		
+        if (hand.size() != 2) {
+        	textArea.append("Please input 2 cards for the hand.");
+        } else {
+        	String result = new Table(hand, table).toString();
+        	textArea.append(result);
+        }
 	}
 	
 	public void clearFilters() {

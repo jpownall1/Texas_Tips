@@ -14,6 +14,9 @@ public class Table {
     public Table(List<Card> h, List<Card> t) throws IllegalArgumentException {
     	this.hand = h;
     	this.table = t;
+    	if (hand.size() != 2) {
+    		throw new IllegalArgumentException("Texas Holdem poker requires 2 cards in hand.");
+    	}
     	if (isThereDuplicates()) {
     		throw new IllegalArgumentException("There are duplicate cards.");
     	}
