@@ -172,12 +172,8 @@ public class AbstractTableFrame extends JFrame implements ActionListener {
 	        	}
         	}
         }
-        if (hand.size() != 2) {
-        	textArea.append("Please input 2 cards for the hand.");
-        } else {
-        	String result = new Table(hand, table).toString();
-        	textArea.append(result);
-        }
+        String result = new Table(hand, table).toString();
+        textArea.append(result);
 	}
 	
 	public void clearFilters() {

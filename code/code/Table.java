@@ -11,16 +11,9 @@ public class Table {
 	private final List<Card> hand;
     private final List<Card> table;
 	
-    public Table(List<Card> h, List<Card> t) throws IllegalArgumentException {
+    public Table(List<Card> h, List<Card> t) {
     	this.hand = h;
     	this.table = t;
-    	if (hand.size() != 2) {
-    		throw new IllegalArgumentException("Texas Holdem poker requires 2 cards in hand.");
-    	}
-    	if (isThereDuplicates()) {
-    		throw new IllegalArgumentException("There are duplicate cards.");
-    	}
-    	
     }
     
     public List<Card> getHand() {
@@ -116,7 +109,8 @@ public class Table {
 				setTwo.add(sVal);
     		}
     	}
-    	for (int j = 0; j<=4; j++) {
+    	if (!isThereDuplicates()) {
+    		for (int j = 0; j<=4; j++) {
     		List<Integer> straightOne = new ArrayList<>();
     		List<Integer> straightTwo = new ArrayList<>();
     		int countOne = 0;
@@ -138,6 +132,7 @@ public class Table {
     		}
     		straightOne.clear();
     		straightTwo.clear();
+    	}
     	}
     	
     	return false;
@@ -197,7 +192,9 @@ public class Table {
     
     public String toString() {
     	
-    	if (this.checkForRF()) { return "You have a Royal Flush!"; }
+    	if (hand.size() != 2) { return "You need 2 cards in your hand."; }
+    	else if (isThereDuplicates()) { return "You have duplicated cards."; }
+    	else if (this.checkForRF()) { return "You have a Royal Flush!"; }
     	else if (this.checkForSF()) { return "You have a Straight Flush!"; }
     	else if (this.checkFor(4)) { return "You have 4 of a Kind!"; }
     	else if (this.checkForFull()) { return "You have a Full House!"; }
