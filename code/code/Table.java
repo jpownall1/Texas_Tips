@@ -39,7 +39,8 @@ public class Table {
     	boolean duplicates = false;
     	for (int j=0; j < this.combine().size(); j++) {
     		for (int k=j+1; k < this.combine().size(); k++) {
-    			if (k!=j && combine().get(k).getSuit() == combine().get(j).getSuit() && combine().get(k).getValue() == combine().get(j).getValue())
+    			if (k!=j && combine().get(k).getSuit() == combine().get(j).getSuit() 
+    					&& combine().get(k).getValue() == combine().get(j).getValue())
     				duplicates = true;
     		}
     	}

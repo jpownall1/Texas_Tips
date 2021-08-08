@@ -144,12 +144,6 @@ public class AbstractTableFrame extends JFrame implements ActionListener {
         	}
 		});
 		
-		valueComboBoxes[1].addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-        		System.out.println(valueComboBoxes[1].getSelectedItem().toString());
-        	}
-		});
-		
 	}
 	
 	//this method converts inputs from combo boxes into cards and puts them into the Table to present
