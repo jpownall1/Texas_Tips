@@ -12,7 +12,6 @@ public class Card {
         } else {
         	throw new IllegalArgumentException("Card value must be between 1 and 13.");
         }
-    	
     }
 
     public int getValue() {
@@ -32,7 +31,6 @@ public class Card {
     	else if (value == 13) { s.concat("King"); }
     	else { s.concat(String.valueOf(value)); }
     	s.concat(" of " + suit);
-    	
     	return s;
     	
     }
