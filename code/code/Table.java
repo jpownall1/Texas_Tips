@@ -3,26 +3,54 @@ package code;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class what takes the cards on the (theoretical) table for one player and finds 
+ * out their highest hand rank.
+ * Designed to help people who do not have a good understanding of poker hand rankings.
+ *
+ * @version 1.0 24/08/2021
+ *
+ * @author Jordan Pownall (jord_pownall@hotmail.co.uk)
+ *
+ * Copyright (c) Jordan Pownall 2021
+ */
+
 public class Table {
 
 	private final List<Card> hand;
     private final List<Card> table;
     private final int royalStraightVals[] = {1,10,11,12,13};
 	
+    /**
+     * Constructor
+     * @param h List of cards in the players hand (has to have length 2)
+     * @param t List of cards currently on the table (has to have length 1-5)
+     */
     public Table(List<Card> h, List<Card> t) {
     	this.hand = h;
     	this.table = t;
     }
     
+    /**
+     * get method
+     * @return List of cards in players hand
+     */
     public List<Card> getHand() {
 		return hand;
 	}
     
+    /**
+     * get method
+     * @return List of cards on the table
+     */
     public List<Card> getTable() {
 		return table;
 	}
     
-    //returns array list of all the cards on the table for various uses
+    /**
+     * combine method to combine cards in hand on table into list
+     * @return List of cards in game for player
+     */
     public List<Card> combine() {
     	List<Card> allCards = new ArrayList<>();
     	for (Card cH : hand) {
@@ -34,6 +62,10 @@ public class Table {
     	return allCards;
     }
     
+    /**
+     * converts combine() to list of the values
+     * @return
+     */
     public List<Integer> combineVals() {
     	List<Integer> tableVals = new ArrayList<>();
     	for (Card cH : this.combine()) { tableVals.add(cH.getValue()); }
@@ -41,7 +73,10 @@ public class Table {
     	return tableVals;
     }
     
-    //checks if there are any duplicates in the game for error checking
+    /**
+     * checks if there are any duplicates in the game for error checking
+     * @return Boolean true if there are duplicate cards.
+     */
     public boolean isThereDuplicates() {
     	boolean duplicates = false;
     	for (int j=0; j < this.combine().size(); j++) {
@@ -54,8 +89,12 @@ public class Table {
     	return duplicates;
     }
     
-    //this method checks how many matches of values each card in the hand has, so the first value says
-    //how many the first hand card has, second vice versa. So checkFor(2) would check for a pair.
+    /**
+     * this method checks how many matches of values each card in the hand has, so the first value says
+     * how many the first hand card has, second vice versa. So checkFor(2) would check for a pair.
+     * @param amount Integer representing what 'of a kind' to check for
+     * @return Boolean true of the 'of a kind' is present in the game for the player
+     */
     public boolean checkFor(int amount) {
     	Integer[] counts = {0,0};
     	for (int i=0;  i < 2; i++) {
@@ -73,7 +112,10 @@ public class Table {
     	return false;
     }
     
-    //checks for a two pair hand
+    /**
+     * checks if player has a two pair
+     * @return Boolean true if player has a two pair
+     */
     public boolean checkForTwoPair() {
     	Boolean[] pairs = {false,false};
     	for (int i=0;  i < hand.size(); i++) {
@@ -90,7 +132,10 @@ public class Table {
 		
     }
     
-    //this method returns an array of the straight values.
+    /**
+     * method to find the straight of cards if the player has one
+     * @return List of cards in straight for player.
+     */
     public List<Integer> checkForStraight() {
     	
     	List<Integer> straight = new ArrayList<>();
@@ -120,7 +165,10 @@ public class Table {
     	return straight;
     }
     
-    //this method checks for a flush
+    /**
+     * method to check if player has a Flush.
+     * @return Boolean true if player has a flush
+     */
     public boolean checkForFlush() {
     	
     	Integer[] counts = {0,0};
@@ -138,7 +186,10 @@ public class Table {
     	return false;
     }
 	
-    //this method checks for a full house, so checks for a pair and a 3 of a kind.
+    /**
+     * method to check for a full house, so checks for a pair and a 3 of a kind.
+     * @return Boolean true if player has a full house
+     */
     public boolean checkForFull() {
     	if (this.checkFor(2) && this.checkFor(3)) {
     		return true;
@@ -146,14 +197,17 @@ public class Table {
     	return false;
     }
     
-    //checks for a straight flush
+    /**
+     * method to check for a straight flush (if one card has a straight and
+     * a flush
+     * @return Boolean true if the player has a straight flush
+     */
     public boolean checkForSF() {
     	
     	if (checkForStraight().size() >= 5) {
     		for (Card c : hand) {
     			int count = 0;
     			if (checkForStraight().contains(c.getValue())) {
-    				
     				for (Card i : combine()) {
     					if (checkForStraight().contains(i.getValue())) {
     						if (c.getSuit() == i.getSuit()) {
@@ -169,7 +223,11 @@ public class Table {
     	return false;
     }
     
-    //method to check for royal flush
+    /**
+     * method to check for a straight flush (if one card has a straight and
+     * a flush
+     * @return Boolean true if the player has a royal flush
+     */
     public boolean checkForRF() {
     	
     	if (!(checkForStraight().size() >= 5) || !checkForFlush()) {
@@ -206,7 +264,9 @@ public class Table {
     	
     }
     
-    //toString method to return the string with the highest hand ranking to be displayed
+    /**
+     * toString method to return the string with the highest hand ranking to be displayed
+     */
     public String toString() {
     	
     	if (hand.size() != 2) { return "You need 2 cards in your hand."; }

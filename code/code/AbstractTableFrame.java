@@ -23,14 +23,25 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 
+/**
+ * Abstract lass that provides a basic implementation of the main elements in the GUI.
+ * Designed for other methods to be implemented by overriding in class TableFrame.
+ *
+ * version 1.0 25/08/2021
+ *
+ * @author Jordan Pownall (jord_pownall@hotmail.co.uk)
+ *
+ * Copyright (c) Jordan Pownall 2021
+ */
 
 public class AbstractTableFrame extends JFrame implements ActionListener {
 	
-	//setting up combo boxes and buttons
+	//start definition of combo boxes and buttons
     JButton clearButton = new JButton("Clear");	//presses to clear all card options
 	JButton submitButton = new JButton("Submit");	//presses to submit cards to determine results
 	JTextArea textArea = new JTextArea();	//where the user will see results
 	
+	//boxed for each cards suit
 	JComboBox[] suitComboBoxes = new JComboBox[7];{
 		for (int i = 0; i < 7; i++) {
 			suitComboBoxes[i] = new JComboBox();
