@@ -24,7 +24,7 @@ import javax.swing.JTextField;
 import javax.swing.border.Border;
 
 /**
- * Abstract lass that provides a basic implementation of the main elements in the GUI.
+ * Abstract class that provides a basic implementation of the main elements in the GUI.
  * Designed for other methods to be implemented by overriding in class TableFrame.
  *
  * version 1.0 25/08/2021

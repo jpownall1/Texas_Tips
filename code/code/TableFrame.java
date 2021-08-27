@@ -19,6 +19,11 @@ import javax.swing.JComboBox;
 
 public class TableFrame extends AbstractTableFrame implements ActionListener {
 
+	/**
+	 * This is to convert combobox strings into their integer form for calculations.
+	 * @param i string card value passed from combobox
+	 * @return integer form 
+	 */
 	public int convertToInt(String i) {
 		
 		if (i == "ACE") { return 1; }
@@ -29,7 +34,9 @@ public class TableFrame extends AbstractTableFrame implements ActionListener {
 		
 	}
 	
-	
+	/**
+	 * This method adds action listeners to the components
+	 */
 	public void addListeners() {
 		
 		submitButton.addActionListener(new ActionListener() {
@@ -46,8 +53,11 @@ public class TableFrame extends AbstractTableFrame implements ActionListener {
 		
 	}
 	
-	//this method converts inputs from combo boxes into cards and puts them into the Table to present
-	//results in appropriate section
+	//this method 
+	/**
+	 * converts inputs from combo boxes into cards and puts them into the Table object to present
+	 * results in appropriate section
+	 */
 	public void updateResults() {
 		
 		textArea.setText("");
@@ -70,6 +80,9 @@ public class TableFrame extends AbstractTableFrame implements ActionListener {
         textArea.append(result);
 	}
 	
+	/**
+	 * resets all components back to null
+	 */
 	public void clearFilters() {
 		
 		for (JComboBox i : suitComboBoxes) {
