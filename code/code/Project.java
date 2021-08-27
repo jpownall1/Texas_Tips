@@ -14,12 +14,11 @@ import java.util.List;
  */
 
 public class Project {
-
-	
 	
 	public static void main(String[] args) {
 		
 		startCLI();
+		startGUI();
 		
 	}
 	
@@ -40,6 +39,13 @@ public class Project {
 		
 		Table game = new Table(h,t);
 		System.out.println(game);
+		
+	}
+	
+	public static void startGUI() {
+		
+		AbstractTableFrame run = new TableFrame();
+		run.setVisible(true);
 		
 	}
 	

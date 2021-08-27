@@ -34,7 +34,7 @@ import javax.swing.border.Border;
  * Copyright (c) Jordan Pownall 2021
  */
 
-public class AbstractTableFrame extends JFrame implements ActionListener {
+public abstract class AbstractTableFrame extends JFrame {
 	
 	//start definition of combo boxes and buttons
     JButton clearButton = new JButton("Clear");	//presses to clear all card options
@@ -131,73 +131,10 @@ public class AbstractTableFrame extends JFrame implements ActionListener {
 		
 	}
 	
-	public int convertToInt(String i) {
-		
-		if (i == "ACE") { return 1; }
-		else if (i == "JACK") { return 11; }
-		else if (i == "QUEEN") { return 12; }
-		else if (i == "KING") { return 13; }
-		else { return Integer.valueOf(i); }
-		
-	}
+	public abstract void addListeners();
 	
-	public void addListeners() {
-		
-		submitButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				updateResults();
-        	}
-		});
-		
-		clearButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				clearFilters();
-        	}
-		});
-		
-	}
+	public abstract void updateResults();
 	
-	//this method converts inputs from combo boxes into cards and puts them into the Table to present
-	//results in appropriate section
-	public void updateResults() {
-		
-		textArea.setText("");
-		List<Card> hand = new ArrayList<>();
-        List<Card> table = new ArrayList<>();
-        
-        for (int i = 0; i < 7; i++) {
-        	String suitS = suitComboBoxes[i].getSelectedItem().toString();
-        	String value = valueComboBoxes[i].getSelectedItem().toString();
-        	if (suitS != "null" && value != "null") {
-	        	Suit suit = Suit.valueOf(suitS.toUpperCase());
-	        	if (i < 2) {
-	        		hand.add(new Card(convertToInt(value), suit));
-	        	} else {
-	        		table.add(new Card(convertToInt(value), suit));
-	        	}
-        	}
-        }
-        String result = new Table(hand, table).toString();
-        textArea.append(result);
-	}
-	
-	public void clearFilters() {
-		
-		for (JComboBox i : suitComboBoxes) {
-			i.setSelectedItem("null");
-		}
-		for (JComboBox i : valueComboBoxes) {
-			i.setSelectedItem("null");
-		}
-		
-	}
-	
-	
-	public static void main(String[] args) {
-		
-		AbstractTableFrame run = new AbstractTableFrame();
-		run.setVisible(true);
-		
-	}
+	public abstract void clearFilters();
 	
 }
